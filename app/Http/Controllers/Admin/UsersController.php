@@ -114,12 +114,12 @@ class UsersController extends Controller
             //1==>the field is empty
             //2 ===> the field is doesnot exist i database
             // handlig first condition
-            if($request->input('MacAdress')==null)
+            if($request->input('mac_address')==null)
             {
                 return response()->json($user->GetValidationError(),422);
             }
             //handling second condition
-            $user->MacAdress=$request->input('MacAdress');
+            $user->MacAdress=$request->input('mac_address');
             //savingthe user in the database
             if($user->save())
             {
@@ -134,7 +134,7 @@ class UsersController extends Controller
             }
         }else{
             //return the m3u files else
-            $user = $user::select()->where('MacAdress',$request->input('MacAdress'))->first();
+            $user = $user::select()->where('mac_adress',$request->input('mac_Adress'))->first();
             $detail = $user;
             $period = Carbon::parse($detail->created_at)->diffInDays(Carbon::now());
             if($period <=7 ) {
@@ -157,7 +157,7 @@ class UsersController extends Controller
 
     public function RetreiveUser($request){
         $user = new User();
-        $user = $user::where('MacAdress',$request->MacAdress)->first();
+        $user = $user::where('mac_address',$request->MacAdress)->first();
         return $user;
     }
 
@@ -176,7 +176,7 @@ class UsersController extends Controller
     public function addm3u(Request $request,M3UFile $file,User $reader){
         $validator = Validator::make($request->all(),[
             'file' => 'required',
-            'MacAdress' => 'required|exists:users,MacAdress'
+            'mac_Adress' => 'required|exists:iptvusers,mac_address'
         ]);
         if(!$validator->fails()) {
             //retreive the user against macadress
@@ -224,7 +224,7 @@ class UsersController extends Controller
         {
             return response()->json($user->GetValidationError(),422);
         }else{
-            $user=$user->where('MacAdress',$request->MacAdress)->first()->expiry_date;
+            $user=$user->where('mac_address',$request->mac_address)->first()->expiry_date;
             return response()->json(['expiry'=>$user],200);
         }
     }

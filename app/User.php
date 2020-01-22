@@ -79,7 +79,7 @@ class User extends Authenticatable
 
     public function ValidateUser(\Illuminate\Http\Request $request){
         $validator = Validator::make($request->all(),[
-            'MacAdress' => 'required|exists:users,MacAdress',
+            'MacAdress' => 'required|exists:iptvusers,mac_address',
         ]);
         $this->validator=$validator;
     }
