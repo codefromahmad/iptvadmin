@@ -46,7 +46,7 @@ class IptvuserController extends Controller
     {
 
         $validatedData = $request->validate([
-            'mac_address' => ['required','unique:Iptvusers','regex:/^(([0-9a-fA-F]{2}-){5}|([0-9a-fA-F]{2}:){5})[0-9a-fA-F]{2}$/' , 'max:17' , 'min:17'],
+            'mac_address' => ['required','unique:iptvusers','regex:/^(([0-9a-fA-F]{2}-){5}|([0-9a-fA-F]{2}:){5})[0-9a-fA-F]{2}$/' , 'max:17' , 'min:17'],
             'm3ufile' => 'required',
             'epgfile' => 'required',
         ]);
@@ -57,8 +57,6 @@ class IptvuserController extends Controller
 
         if (!$request->hasFile('m3ufile') && !$request->hasFile('epgfile'))
             return false;
-
-
         $file = [];
         $file['m3u']['file'] = $request->file('m3ufile');
         $file['m3u']['name'] = $user->id . '.' . $file['m3u']['file']->getClientOriginalExtension();

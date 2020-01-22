@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Iptvusers extends Model
 {
+    protected $table = "iptvusers";
     protected $fillable = ['mac_address','period'];
 
     public function m3ufile(){
