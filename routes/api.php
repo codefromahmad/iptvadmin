@@ -10,10 +10,10 @@
 ////    Route::apiResource('products', 'ProductsApiController');
 //});
 
-Route::post('/m3ufiles','UserController@getList');
-Route::post('/add','UserController@addm3u');
-Route::get('/get/file/{path}','UserController@downloadfile')->name('getfile');
-Route::post('/get','UserController@GetM3u');
-Route::get('/test','UserController@test');
-Route::post('/tester','UserController@get_all_user');
-Route::post('/expires','UserController@UserExpirayDate');
+Route::post('/m3ufiles','Admin/UserController@getList');
+Route::post('/add','Admin/UserController@addm3u');
+Route::get('/get/file/{path}','Admin/UserController@downloadfile')->name('getfile');
+Route::post('/get','Admin/UserController@GetM3u');
+Route::get('/test','Admin/UserController@test');
+Route::post('/tester','Admin/UserController@get_all_user');
+Route::post('/expires','Admin/UserController@UserExpirayDate');
