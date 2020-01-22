@@ -26,6 +26,6 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->alias('bugsnag.logger', \Illuminate\Contracts\Logging\Log::class);
         $this->app->alias('bugsnag.logger', \Psr\Log\LoggerInterface::class);
-        Schema::defaultStringLength(191);
+//        Schema::defaultStringLength(191);
     }
 }
