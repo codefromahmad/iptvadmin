@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Validator;
 
 
 class IptvuserController extends Controller

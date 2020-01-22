@@ -9,6 +9,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Validator;
 
 class User extends Authenticatable
 {
@@ -72,25 +73,5 @@ class User extends Authenticatable
     }
 
 
-    /**
-     * Shahab responsible
-     */
-
-
-    public function ValidateUser(\Illuminate\Http\Request $request){
-        $validator = Validator::make($request->all(),[
-            'MacAdress' => 'required|exists:iptvusers,mac_address',
-        ]);
-        $this->validator=$validator;
-    }
-    public function IsUserValidationFailed()
-    {
-        if($this->validator != null)
-            return $this->validator->fails();
-    }
-    public function GetValidationError()
-    {
-        return $this->validator->errors();
-    }
 
 }

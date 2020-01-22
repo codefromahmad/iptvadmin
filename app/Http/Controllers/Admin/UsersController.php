@@ -6,8 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDestroyUserRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Iptvusers;
 use App\Role;
+use App\SubscriptionPackage;
 use App\User;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
@@ -106,37 +110,21 @@ class UsersController extends Controller
      * ==> get m3u file against mac
      */
 
-    public function getList(Request $request,User $user){
+    public function getList(Request $request,Iptvusers $user){
         $user->ValidateUser($request);
         if($user->IsUserValidationFailed())
         {
-            //there are two [possible scenes
-            //1==>the field is empty
-            //2 ===> the field is doesnot exist i database
-            // handlig first condition
-            if($request->input('mac_address')==null)
-            {
-                return response()->json($user->GetValidationError(),422);
-            }
-            //handling second condition
-            $user->MacAdress=$request->input('mac_address');
-            //savingthe user in the database
-            if($user->save())
-            {
-                return response()->json([
-                    'period' => 7,
-                    'file' => null
-                ],200);
+            return response()->json([
+                'period' => null,
+                'MacAdress' => null,
+                'file' => null
+            ],200);
 
-            }else{
-                // returning the error in saving the user
-                return response()->json(['error'=>'failed to save the user'],422);
-            }
         }else{
             //return the m3u files else
-            $user = $user::select()->where('mac_adress',$request->input('mac_Adress'))->first();
+            $user = $user::select()->where('mac_address',$request->input('MacAdress'))->first();
             $detail = $user;
-            $period = Carbon::parse($detail->created_at)->diffInDays(Carbon::now());
+            $period = Carbon::parse($detail->expiry_date)->diffInDays(Carbon::now());
             if($period <=7 ) {
                 //getting the associated m3u file
                 $link = $user->m3ufile;
@@ -145,8 +133,9 @@ class UsersController extends Controller
                     $user->period=$period;
                 $user->save();
                 return response()->json([
+                    'MacAdress' => $user->mac_address,
                     'period' => $user->period,
-                    'file' =>   $link ? json_decode($link->File):null
+                    'file' =>   $link ? json_decode(\FileOperations::ConvertM3U($link->mfile)):null
                 ], 200);
             }else{
                 return response(['error' => 'subscription timed out'],422);
@@ -156,7 +145,7 @@ class UsersController extends Controller
     }
 
     public function RetreiveUser($request){
-        $user = new User();
+        $user = new Iptvusers();
         $user = $user::where('mac_address',$request->MacAdress)->first();
         return $user;
     }
@@ -218,16 +207,43 @@ class UsersController extends Controller
     {
         return User::all();
     }
-    public function UserExpirayDate(Request $request,User $user){
+    public function UserExpirayDate(Request $request,Iptvusers $user){
         $user->ValidateUser($request);
         if($user->IsUserValidationFailed())
-        {
-            return response()->json($user->GetValidationError(),422);
-        }else{
+            $this->SendVallidationErrorMessageResposne();
+       else{
             $user=$user->where('mac_address',$request->mac_address)->first()->expiry_date;
             return response()->json(['expiry'=>$user],200);
         }
     }
+
+    public function AboutChannels(Request $request,Iptvusers $user)
+    {
+        $user->VallidateUserWithChannelId($request);
+        if($user->IsUserValidationFailed())
+            $user->SendVallidationErrorMessageResposne();
+        else{
+            return response()->json(\FileOperations::xml($request->id,$user),200);
+        }
+    }
+
+    public function IncreseExpiryDate(Request $request,Iptvusers $user,SubscriptionPackage $package)
+    {
+        $user->VallidateUserWithAmount($request);
+        if($user->IsUserValidationFailed())
+        $this->SendVallidationErrorMessageResposne();
+        else{
+            $user=$user->GetUser($request->MacAdress);
+            $package = $package->GetPackage($request);
+            $user->expiry_date=Carbon::parse($user->expiry_date)->addDays($package->DayIncrease);
+            if($user->save())
+                return response()->json(['message'=>'Account Subscription is increased by '.$package->MonthIncrease.' month/s'],200);
+            else
+                return response()->json(['message'=>'Account Subscription increase failed'],422);
+        }
+    }
+
+
 
 
 }

@@ -4,7 +4,9 @@
 namespace App\Facades;
 
 
+use App\Iptvusers;
 use App\M3uData;
+use Illuminate\Support\Facades\Storage;
 
 class FileOperations
 {
@@ -12,9 +14,10 @@ class FileOperations
      * @param $file
      * @return false|resource
      */
-    private function GetFileReader(&$file)
+    private function GetFileReader($file)
     {
-        return fopen($file,'r');
+
+        return fopen('../storage/app/'.$file,'r');
     }
 
     /**
@@ -59,7 +62,7 @@ class FileOperations
      * converts the m3u files to json objects
      */
 
-    public function ConvertM3U($filename)
+    public function ConvertM3U(&$filename)
     {
         $file = $this->AdjustLinesM3uFile($filename);
         $list = array();
@@ -94,57 +97,21 @@ class FileOperations
         return (substr($string, 0, $len) === $startString);
     }
 // epg file readers
-    public function xml_iterator(){
-        $rr = new SimpleXMLElement(Storage::get('xml/BR.xml'));
-        echo $rr->getName();
-
-        foreach ($rr->children() as $child)
-        {
-            if ($child->getName() == 'channel' || $child->getName() == 'programme' )
-            {
-                foreach ($child->children() as $name){
-                    if ($name->getName() == 'display-name' || $name->getName() == 'title' || $name->getName() == 'sub-title' || $name->getName() == 'desc' ||
-                        $name->getName() == 'icon' || $name->getName() == 'episode-num' || $name->getName() == 'credits' || $name->getName() == 'date' ||
-                        $name->getName() == 'category' || $name->getName() == 'star-rating' || $name->getName() == 'rating' || $name->getName() == 'country')
-                    {
-                        continue;
-                    }
-//                echo $name->getName() . "<br>";
-                }
-            }
-        }
-
-
-        $xmlIterator = new SimpleXMLIterator(Storage::get('xml/BR.xml'));
-        for( $xmlIterator->rewind(); $xmlIterator->valid(); $xmlIterator->next() ) {
-            foreach($xmlIterator->getChildren() as $name => $data) {
-//                if ($name == 'display-name' || $name == 'title' || $name == 'sub-title' || $name == 'desc' ||
-//                    $name == 'icon' || $name == 'episode-num' || $name == 'credits' || $name == 'date' ||
-//                    $name == 'category' || $name == 'star-rating' || $name == 'rating' || $name == 'country')
-//                {
-//                    continue;
-//                }
-//                echo $name. '<>'.  var_dump($data) .'<br>';
-
-            }
-        }
-    }
-
-    public function get_xml() {
-        $xml = simplexml_load_string(Storage::get('xml/TR.xml'));
+    public function get_xml($EpgFile) {
+        $xml = simplexml_load_string(Storage::get($EpgFile));
         if(!$xml)
             throw new ParserException('Failed To Parse XML');
         return json_decode(json_encode($xml), true);   // Work arround to accept xml input
     }
 
-    public function xml(Request $request){
-        $id = $request->id; // this is channel id
+    public function xml($Channel,Iptvusers $user){
+        $EpgFile = $user->epgfile;
+        $id =$Channel;  // this is channel id
 
         if ($id == null)
             return response()->json(['id' => $id , 'error' => 'Channel id can not be null'], 400);
 
-        $object = $this->get_xml();
-
+        $object = $this->get_xml($EpgFile->efile);
 
         $channels = $object['channel'];
         $programmes = $object['programme'];
@@ -219,7 +186,6 @@ class FileOperations
                         'interval'  => (string)$diff
                     ],
                 ];
-
 
                 if($start > $now && $count<3)   // comparing programme date with today's date to get next programmes and current programme
                 {

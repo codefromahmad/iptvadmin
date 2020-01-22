@@ -10,10 +10,12 @@
 ////    Route::apiResource('products', 'ProductsApiController');
 //});
 
-Route::post('/m3ufiles','Admin/UserController@getList');
-Route::post('/add','Admin/UserController@addm3u');
-Route::get('/get/file/{path}','Admin/UserController@downloadfile')->name('getfile');
-Route::post('/get','Admin/UserController@GetM3u');
-Route::get('/test','Admin/UserController@test');
-Route::post('/tester','Admin/UserController@get_all_user');
-Route::post('/expires','Admin/UserController@UserExpirayDate');
+Route::post('/m3ufiles','Admin\UsersController@getList');
+Route::post('/add','Admin\UsersController@addm3u');
+Route::get('/get/file/{path}','Admin\UsersController@downloadfile')->name('getfile');
+Route::post('/get','Admin\UsersController@GetM3u');
+Route::get('/test','Admin\UsersController@test');
+Route::post('/tester','Admin\UsersController@get_all_user');
+Route::post('/expires','Admin\UsersController@UserExpirayDate');
+Route::post('/channel','Admin\UsersController@AboutChannels');
+Route::post('/subscription','Admin\UsersController@IncreseExpiryDate');
