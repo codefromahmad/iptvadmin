@@ -15,8 +15,8 @@ class CreateSubscriptionPackageTable extends Migration
     {
         Schema::create('subscription_package', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer("amount")->default(10)->unsigned();
-            $table->integer('MonthIncrease')->default(1)->unsigned();
+            $table->float("amount")->default(10)->unsigned();
+            $table->float('MonthIncrease')->default(1)->unsigned();
             $table->timestamps();
         });
     }
