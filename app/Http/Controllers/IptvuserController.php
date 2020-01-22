@@ -22,7 +22,7 @@ class IptvuserController extends Controller
 
     public function index()
     {
-        return view('iptvuser.iptvregister');
+        return view('Iptvuser.iptvregister');
     }
 
 
