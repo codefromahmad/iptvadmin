@@ -124,6 +124,7 @@ class UsersController extends Controller
             //return the m3u files else
             $user = $user::select()->where('mac_address',$request->input('MacAdress'))->first();
             $detail = $user;
+            dd(Carbon::parse($detail->expiry_date)->toString() ."  ".Carbon::now()->toString());
             $period = Carbon::parse($detail->expiry_date)->diffInDays(Carbon::now());
             if($period <=7 ) {
                 //getting the associated m3u file
@@ -231,7 +232,7 @@ class UsersController extends Controller
     {
         $user->VallidateUserWithAmount($request);
         if($user->IsUserValidationFailed())
-        $this->SendVallidationErrorMessageResposne();
+        $user->SendVallidationErrorMessageResposne();
         else{
             $user=$user->GetUser($request->MacAdress);
             $package = $package->GetPackage($request);
