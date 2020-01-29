@@ -224,7 +224,7 @@ class UsersController extends Controller
         if($user->IsUserValidationFailed())
             $user->SendVallidationErrorMessageResposne();
         else{
-            return response()->json(\FileOperations::xml($request->ChannelId,$user->GetUser($request->input("MacAdress"))),200);
+            return response()->json(['channel'=>\FileOperations::xml($request->ChannelId,$user->GetUser($request->input("MacAdress")))],200);
         }
     }
 
