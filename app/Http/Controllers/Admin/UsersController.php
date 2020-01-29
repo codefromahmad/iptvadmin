@@ -211,7 +211,7 @@ class UsersController extends Controller
     public function UserExpirayDate(Request $request,Iptvusers $user){
         $user->ValidateUser($request);
         if($user->IsUserValidationFailed())
-            $this->SendVallidationErrorMessageResposne();
+            $user->SendVallidationErrorMessageResposne();
        else{
             $user=$user->where('mac_address',$request->mac_address)->first()->expiry_date;
             return response()->json(['expiry'=>$user],200);
