@@ -45,7 +45,6 @@ class IptvuserController extends Controller
      */
     public function store(Request $request)
     {
-
         $validatedData = $request->validate([
             'mac_address' => ['required','unique:iptvusers','regex:/^(([0-9a-fA-F]{2}-){5}|([0-9a-fA-F]{2}:){5})[0-9a-fA-F]{2}$/' , 'max:17' , 'min:17'],
             'm3ufile' => 'required',
