@@ -89,7 +89,7 @@ class FileOperations
             }
             array_push($total_data, $data);
         }
-        return $total_data;
+        return dd($total_data);
     }
     private function startsWith ($string, $startString)
     {

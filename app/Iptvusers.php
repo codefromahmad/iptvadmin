@@ -28,10 +28,11 @@ class Iptvusers extends Model
 
     public function ValidateUser(\Illuminate\Http\Request $request){
         $validator = Validator::make($request->all(),[
-            'MacAdress' => ['required','exists:iptvusers,mac_address','regex:/^(([0-9a-fA-F]{2}-){5}|([0-9a-fA-F]{2}:){5})[0-9a-fA-F]{2}$/' , 'max:17' , 'min:17'],
+            'MacAdress' => ['required','exists:iptvusers,mac_address' , 'max:17' , 'min:17'],
         ]);
         $this->validator=$validator;
     }
+
     public function IsUserValidationFailed()
     {
         if($this->validator != null)

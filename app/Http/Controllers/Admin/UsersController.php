@@ -111,7 +111,7 @@ class UsersController extends Controller
      */
 
     public function getList(Request $request,Iptvusers $user){
-        $user->ValidateUser($request);
+     $user->ValidateUser($request);
         if($user->IsUserValidationFailed())
         {
             return response()->json([
@@ -125,7 +125,7 @@ class UsersController extends Controller
             $user = $user::select()->where('mac_address',$request->input('MacAdress'))->first();
             $detail = $user;
             $period = Carbon::parse($detail->expiry_date)->diffInDays(Carbon::now());
-            if($period <=7 ) {
+            if($period > 0 ) {
                 //getting the associated m3u file
                 $link = $user->m3ufile;
                 //if user is newly created then the difference will be zero so no need to update
@@ -244,6 +244,10 @@ class UsersController extends Controller
     }
 
 
-
+public function get_file(Request $request,Iptvusers $user)
+{
+   $user = $user->GetUser($request->input('MacAdress'));
+   dd($user);
+}
 
 }
