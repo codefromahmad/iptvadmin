@@ -213,6 +213,7 @@ class UsersController extends Controller
             $user->SendVallidationErrorMessageResposne();
        else{
             $user=$user->GetUser($request->input("MacAdress"))->expiry_date;
+            dd($user);
             return response()->json(['expiry'=>$user],200);
         }
     }
@@ -223,7 +224,7 @@ class UsersController extends Controller
         if($user->IsUserValidationFailed())
             $user->SendVallidationErrorMessageResposne();
         else{
-            return response()->json(['channel'=>\FileOperations::xml($request->ChannelId,$user->GetUser($request->input("MacAdress")))],200);
+            return response()->json(\FileOperations::xml($request->ChannelId,$user->GetUser($request->input("MacAdress")))],200);
         }
     }
 
