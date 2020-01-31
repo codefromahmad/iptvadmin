@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
@@ -63,5 +64,8 @@ class Iptvusers extends Model
     }
     public function SendVallidationErrorMessageResposne(){
         return response()->json($this->GetValidationError(),422);
+    }
+    public function GetExpiryDate($MacAdress){
+        return  Carbon::parse($this->GetUser($MacAdress)->expiry_date);
     }
 }

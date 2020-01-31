@@ -212,8 +212,8 @@ class UsersController extends Controller
         if($user->IsUserValidationFailed())
             $user->SendVallidationErrorMessageResposne();
        else{
-            $user=$user->GetUser($request->input("MacAdress"))->expiry_date;
-            return response()->json(['expiry'=>$user],200);
+            $date=$user->GetExpiryDate($request->input('MacAdress'));
+            return response()->json(['expiry'=>$date->toDateString()],200);
         }
     }
 
