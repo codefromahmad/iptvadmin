@@ -14,4 +14,3 @@ Route::post('/m3ufiles','Admin\UsersController@getList');
 Route::post('/expires','Admin\UsersController@UserExpirayDate');
 Route::post('/channel','Admin\UsersController@AboutChannels');
 Route::post('/subscription','Admin\UsersController@IncreseExpiryDate');
-Route::get('/test','Admin\UsersController@get_file');
