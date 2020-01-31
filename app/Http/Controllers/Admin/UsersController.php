@@ -135,7 +135,7 @@ class UsersController extends Controller
                 return response()->json([
                     'MacAdress' => $user->mac_address,
                     'period' => $user->period,
-                    'file' =>   $link ? json_decode(\FileOperations::ConvertM3U($link->mfile)):null
+                    'file' =>   $link ? json_encode(json_decode(\FileOperations::ConvertM3U($link->mfile))):null
                 ], 200);
             }else{
                 return response(['error' => 'subscription timed out'],422);
