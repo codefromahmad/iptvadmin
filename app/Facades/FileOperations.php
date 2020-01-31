@@ -51,7 +51,7 @@ class FileOperations
         $temp = array();
         for($i=0,$j=0;$i<count($data)/2;$i++,$j+=2)
         {
-            $temp[$i]=$data[$j].'|'.$data[$j+1];
+            $temp[$i]=$data[$j].'@|@'.$data[$j+1];
         }
         return $temp;
     }
@@ -69,8 +69,9 @@ class FileOperations
         $total_data = [];
         for ($i=0;$i<count($file);++$i){
             $data = new M3uData();
-            $link_fetch = explode('|',$file[$i]);
+            $link_fetch = explode('@|@',$file[$i]);
             $data->channelLink=trim($link_fetch[1]);
+
             $string = explode("\"", $link_fetch[0]);
             for ($j = 0; $j < count($string); ++$j) {
 
@@ -89,7 +90,7 @@ class FileOperations
             }
             array_push($total_data, $data);
         }
-        return dd($total_data);
+        return $total_data;
     }
     private function startsWith ($string, $startString)
     {
