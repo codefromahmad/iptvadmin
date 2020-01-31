@@ -213,7 +213,7 @@ class UsersController extends Controller
             $user->SendVallidationErrorMessageResposne();
        else{
             $date=$user->GetExpiryDate($request->input('MacAdress'));
-            return response()->json(['expiry'=>$date->format('d/m/y')->toDateString()],200);
+            return response()->json(['expiry'=>$date->format('d/m/y')],200);
         }
     }
 
