@@ -247,7 +247,7 @@ class UsersController extends Controller
 public function get_file(Request $request,Iptvusers $user)
 {
    $user = $user->GetUser($request->input('MacAdress'));
-   dd($user->mfile);
+   dd($user->m3ufile);
 }
 
 }
