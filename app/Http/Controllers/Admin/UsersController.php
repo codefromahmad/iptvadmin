@@ -12,6 +12,7 @@ use App\SubscriptionPackage;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class UsersController extends Controller
 {
@@ -246,9 +247,10 @@ class UsersController extends Controller
 
 public function get_file(Request $request,Iptvusers $user)
 {
-   $user = $user->GetUser($request->input('MacAdress'));
-   \Storage::download($user->m3ufile->mfile);
-   dd($user->m3ufile);
+       $user = $user->GetUser('02:00:00:00:00:00');
+
+   return Storage::download($user->m3ufile->mfile);
+   //dd($user->m3ufile);
 }
 
 }
