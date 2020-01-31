@@ -70,7 +70,7 @@ class FileOperations
         for ($i=0;$i<count($file);++$i){
             $data = new M3uData();
             $link_fetch = explode('|',$file[$i]);
-            $data->channelLink=$link_fetch[1];
+            $data->channelLink=json_encode($link_fetch[1]);
             $string = explode("\"", $link_fetch[0]);
             for ($j = 0; $j < count($string); ++$j) {
 
