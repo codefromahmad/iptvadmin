@@ -275,7 +275,7 @@ class HomeController extends controller{
             ->select('iptvusers.*', 'epgfiles.efile', 'm3ufiles.mfile')
             ->get();
 
-        return view('admin.Iptvuser.index', compact('data'));
+        return view('admin.iptvuser.index', compact('data'));
 
     }
 
