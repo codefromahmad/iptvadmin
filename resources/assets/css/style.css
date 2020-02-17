@@ -1,0 +1,81 @@
+.nav{
+  height: 60px;
+  background-color: #fff;
+  box-shadow: 0px 0px 5px #000;
+  padding: 10px 30px;
+}
+.nav .logo{
+  height: 100%;
+}
+.nav .logo img{
+  height: 100%;
+  margin-left: 45px;
+  display: inline-block;
+}
+.nav ul{
+  float: right;
+  list-style-type: none;
+  display: inline-block;
+  margin-right: 45px;
+  padding: 8px;
+}
+.nav ul li{
+  display: inline;
+  margin: 0px 10px;
+  padding: 10px 20px;
+
+}
+.nav ul li a{
+  font-family: sans-serif;
+  font-size: 18px;
+  color: #000;
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+}
+.nav ul li:hover a{
+  color: rgb(200, 171, 42);
+}
+main{
+  padding: 50px 0;
+}
+.card{
+  padding: 20px 20px;
+}
+.card-body .card-title{
+  font-size: 32px;
+}
+main .news-heading{
+  font-size: 38px;
+}
+.card-date{
+  font-size: 14px;
+  color: rgb(160, 131, 5);
+}
+.mac-div{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.list-form{
+  margin: 30px 0;
+  padding: 20px;
+}
+.epg-link,
+.m3u-link{
+    display: none;
+}
+.epg-link .badge,
+.m3u-link .badge,
+.epg-file .badge,
+.m3u-file .badge {
+    cursor: pointer;
+}

@@ -7,6 +7,14 @@
 
 require('./bootstrap');
 
+//custom files
+require('../assets/js/main.js');
+require('../assets/js/plugins.js');
+require('../assets/js/vendor/jquery-3.4.1.min.js');
+require('../assets/js/vendor/modernizr-3.8.0.min.js');
+
+//end custom files
+
 window.Vue = require('vue');
 
 /**

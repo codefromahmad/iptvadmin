@@ -11,26 +11,18 @@
             <tbody>
                 <tr>
                     <th>
-                        {{ trans('global.product.fields.name') }}
+                        Title
                     </th>
                     <td>
-                        {{ $product->name }}
+                        {{ $news->title }}
                     </td>
                 </tr>
                 <tr>
                     <th>
-                        {{ trans('global.product.fields.description') }}
+                        Description
                     </th>
                     <td>
-                        {!! $product->description !!}
-                    </td>
-                </tr>
-                <tr>
-                    <th>
-                        {{ trans('global.product.fields.price') }}
-                    </th>
-                    <td>
-                        ${{ $product->price }}
+                        {!! $news->description !!}
                     </td>
                 </tr>
             </tbody>

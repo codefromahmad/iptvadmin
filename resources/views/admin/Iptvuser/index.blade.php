@@ -15,17 +15,17 @@
     </div>
 
     @if(session()->has('delete-success'))
-        <div class="alert alert-success alert-dismissible fade show">
+        <div class="alert alert-success">
             {{ session()->get('delete-success') }}
         </div>
     @endif
     @if(session()->has('update-success'))
-        <div class="alert alert-success alert-dismissible fade show">
+        <div class="alert alert-success">
             {{ session()->get('update-success') }}
         </div>
     @endif
     @if(session()->has('insert-success'))
-        <div class="alert alert-success alert-dismissible fade show">
+        <div class="alert alert-success">
             {{ session()->get('insert-success') }}
         </div>
     @endif
@@ -130,7 +130,6 @@
 
       if (ids.length === 0) {
         alert('{{ trans('global.datatables.zero_selected') }}')
-
         return
       }
 
@@ -145,9 +144,9 @@
     }
   }
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-@can('iptvuser_delete')
-  dtButtons.push(deleteButton)
-@endcan
+{{--@can('iptvuser_delete')--}}
+{{--  dtButtons.push(deleteButton)--}}
+{{--@endcan--}}
 
   $('.datatable:not(.ajaxTable)').DataTable({ buttons: dtButtons })
 })

@@ -7,12 +7,13 @@ class PermissionsTableSeeder extends Seeder
 {
     public function run()
     {
-        $permissions = [[
+        $permissions = [
+            [
             'id'         => '1',
             'title'      => 'user_management_access',
             'created_at' => '2019-04-15 19:14:42',
             'updated_at' => '2019-04-15 19:14:42',
-        ],
+            ],
             [
                 'id'         => '2',
                 'title'      => 'permission_create',
@@ -142,6 +143,60 @@ class PermissionsTableSeeder extends Seeder
             [
                 'id'         => '23',
                 'title'      => 'iptvuser_create',
+                'created_at' => '2019-04-15 19:14:42',
+                'updated_at' => '2019-04-15 19:14:42',
+            ],
+            [
+                'id'         => '24',
+                'title'      => 'news_access',
+                'created_at' => '2019-04-15 19:14:42',
+                'updated_at' => '2019-04-15 19:14:42',
+            ],
+            [
+                'id'         => '25',
+                'title'      => 'news_create',
+                'created_at' => '2019-04-15 19:14:42',
+                'updated_at' => '2019-04-15 19:14:42',
+            ],
+            [
+                'id'         => '26',
+                'title'      => 'news_update',
+                'created_at' => '2019-04-15 19:14:42',
+                'updated_at' => '2019-04-15 19:14:42',
+            ],
+            [
+                'id'         => '27',
+                'title'      => 'iptvuser_show',
+                'created_at' => '2019-04-15 19:14:42',
+                'updated_at' => '2019-04-15 19:14:42',
+            ],
+            [
+                'id'         => '28',
+                'title'      => 'iptvuser_edit',
+                'created_at' => '2019-04-15 19:14:42',
+                'updated_at' => '2019-04-15 19:14:42',
+            ],
+            [
+                'id'         => '29',
+                'title'      => 'iptvuser_delete',
+                'created_at' => '2019-04-15 19:14:42',
+                'updated_at' => '2019-04-15 19:14:42',
+            ],
+            [
+                'id'         => '30',
+                'title'      => 'news_delete',
+                'created_at' => '2019-04-15 19:14:42',
+                'updated_at' => '2019-04-15 19:14:42',
+            ],
+            [
+                'id'         => '31',
+                'title'      => 'news_show',
+                'created_at' => '2019-04-15 19:14:42',
+                'updated_at' => '2019-04-15 19:14:42',
+            ],
+            [
+                'id'         => '32',
+                'title'      => 'news_edit',
                 'created_at' => '2019-04-15 19:14:42',
                 'updated_at' => '2019-04-15 19:14:42',
             ],

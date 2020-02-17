@@ -382,5 +382,25 @@ return [
             'deleted_at'         => 'Deleted at',
             'deleted_at_helper'  => '',
         ],
-    ],
+        'news'                              => [
+            'title'          => 'News',
+            'title_singular' => 'News',
+            'fields'         => [
+                'id'                 => 'ID',
+                'id_helper'          => '',
+                'name'               => 'Name',
+                'name_helper'        => '',
+                'description'        => 'Description',
+                'description_helper' => '',
+                'price'              => 'Price',
+                'price_helper'       => '',
+                'created_at'         => 'Created At',
+                'created_at_helper'  => '',
+                'updated_at'         => 'Updated At',
+                'updated_at_helper'  => '',
+                'deleted_at'         => 'Deleted at',
+                'deleted_at_helper'  => '',
+            ],
+        ],
+]
 ];

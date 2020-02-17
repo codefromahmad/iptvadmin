@@ -12,7 +12,7 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item">
-                    <a href="{{ route("admin.home") }}" class="nav-link">
+                    <a href="{{ route("admin.dashboard.home") }}" class="nav-link {{ request()->is('admin/home') || request()->is('admin') ? 'active' : '' }}">
                         <p>
                             <i class="fas fa-tachometer-alt">
 
@@ -21,77 +21,26 @@
                         </p>
                     </a>
                 </li>
-                @can('user_management_access')
-                    <li class="nav-item has-treeview {{ request()->is('admin/permissions*') ? 'menu-open' : '' }} {{ request()->is('admin/roles*') ? 'menu-open' : '' }} {{ request()->is('admin/users*') ? 'menu-open' : '' }}">
-                        <a class="nav-link nav-dropdown-toggle">
-                            <i class="fas fa-users">
-
-                            </i>
-                            <p>
-                                <span>{{ trans('global.userManagement.title') }}</span>
-                                <i class="right fa fa-angle-left"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
-                            @can('permission_access')
-                                <li class="nav-item">
-                                    <a href="{{ route("admin.permissions.index") }}" class="nav-link {{ request()->is('admin/permissions') || request()->is('admin/permissions/*') ? 'active' : '' }}">
-                                        <i class="fas fa-unlock-alt">
-
-                                        </i>
-                                        <p>
-                                            <span>{{ trans('global.permission.title') }}</span>
-                                        </p>
-                                    </a>
-                                </li>
-                            @endcan
-                            @can('role_access')
-                                <li class="nav-item">
-                                    <a href="{{ route("admin.roles.index") }}" class="nav-link {{ request()->is('admin/roles') || request()->is('admin/roles/*') ? 'active' : '' }}">
-                                        <i class="fas fa-briefcase">
-
-                                        </i>
-                                        <p>
-                                            <span>{{ trans('global.role.title') }}</span>
-                                        </p>
-                                    </a>
-                                </li>
-                            @endcan
-                            @can('user_access')
-                                <li class="nav-item">
-                                    <a href="{{ route("admin.users.index") }}" class="nav-link {{ request()->is('admin/users') || request()->is('admin/users/*') ? 'active' : '' }}">
-                                        <i class="fas fa-user">
-
-                                        </i>
-                                        <p>
-                                            <span>{{ trans('global.user.title') }}</span>
-                                        </p>
-                                    </a>
-                                </li>
-                            @endcan
-                        </ul>
-                    </li>
-                @endcan
-{{--                @can('product_access')--}}
-{{--                    <li class="nav-item">--}}
-{{--                        <a href="{{ route("admin.products.index") }}" class="nav-link {{ request()->is('admin/products') || request()->is('admin/products/*') ? 'active' : '' }}">--}}
-{{--                            <i class="fas fa-cogs">--}}
-
-{{--                            </i>--}}
-{{--                            <p>--}}
-{{--                                <span>{{ trans('global.product.title') }}</span>--}}
-{{--                            </p>--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
-{{--                @endcan--}}
                 @can('iptvuser_access')
                     <li class="nav-item">
                         <a href="{{ route("admin.iptvuser.index") }}" class="nav-link {{ request()->is('admin/iptvuser') || request()->is('admin/iptvuser/*') ? 'active' : '' }}" >
-                            <i class="fas fa-users">
+                            <i class="fas fa-user">
 
                             </i>
                             <p>
-                                <span>{{ trans('global.iptvusers.title') }}</span>
+                                <span>Iptv Users</span>
+                            </p>
+                        </a>
+                    </li>
+                @endcan
+                @can('news_access')
+                    <li class="nav-item">
+                        <a href="{{ route("admin.news.index") }}" class="nav-link {{ request()->is('admin/news') || request()->is('admin/news/*') ? 'active' : '' }}" >
+                            <i class="fas fa-newspaper">
+
+                            </i>
+                            <p>
+                                <span>News</span>
                             </p>
                         </a>
                     </li>
