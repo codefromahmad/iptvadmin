@@ -332,41 +332,23 @@ class HomeController extends controller{
         if (file_exists($m3u_path) && file_exists($epg_path)){
             File::delete($m3u_path);
             File::delete($epg_path);
-            $epg->delete();
-            $m3u->delete();
-            $data->delete();
+        }elseif(file_exists($epg_path)){
+            File::delete($epg_path);
+        }elseif (file_exists($m3u_path)){
+            File::delete($m3u_path);
         }
-//
-//        if ($done) {
-//            echo "yes done";
-//        } else {
-//            echo "not done";
-//        }
-//        if(file_exists($image_path)){
-//            //File::delete($image_path);
-//            File::delete( $image_path);
-//        }
-//        $news->delete();
-//        return redirect('admin/dashboard')->with('message','خبر موفقانه حذف  شد');
+        $epg->delete();
+        $m3u->delete();
+        $data->delete();
 
-//        $m3u = M3ufiles::where('user_id', '=', $iptv)->first();
-//        $epg = Epgfiles::where('user_id', '=', $iptv)->first();
-//        $data = Iptvusers::where('id', '=' ,$iptv)->first();
-//
-//        if($data != null && $m3u != null && $epg != null){
-//            $epg->delete();
-//            $m3u->delete();
-//            $data->delete();
-//        }
-//
         return redirect()->back()->with('delete-success', 'Success : One Record deleted Successfully.');
     }
-    public function massDestroy(MassDestroyUserRequest $request)
-    {
-        dd('I am there');
-        Iptvusers::whereIn('id', request('ids'))->delete();
-        M3ufiles::whereIn('user_id', request('ids'))->delete();
-        Epgfiles::whereIn('user_id', request('ids'))->delete();
-        return response(null, 204);
-    }
+//    public function massDestroy(MassDestroyUserRequest $request)
+//    {
+//        dd('I am there');
+//        Iptvusers::whereIn('id', request('ids'))->delete();
+//        M3ufiles::whereIn('user_id', request('ids'))->delete();
+//        Epgfiles::whereIn('user_id', request('ids'))->delete();
+//        return response(null, 204);
+//    }
 }
